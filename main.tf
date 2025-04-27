@@ -35,9 +35,9 @@ resource "aws_dynamodb_table" "this" {
   }
 }
 
-resource "aws_dynamodb_resource_policy" "example" {
-  for_each = { for idx, value in local.applications_data : "${value.table_name}" => value }
+# resource "aws_dynamodb_resource_policy" "example" {
+#   for_each = { for idx, value in local.applications_data : "${value.table_name}" => value }
 
-  resource_arn = aws_dynamodb_table.this[each.key].arn
-  policy       = data.aws_iam_policy_document.test.json
-}
+#   resource_arn = aws_dynamodb_table.this[each.key].arn
+#   policy       = data.aws_iam_policy_document.test.json
+# }
