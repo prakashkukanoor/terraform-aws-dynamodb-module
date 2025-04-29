@@ -11,7 +11,7 @@ locals {
         team                      = domain_name
         policy_json_tpl_file_path = domain_data.dynamo_db_policy_json_tpl_path
         table_name                = table_name
-        arn                       = arn
+        arn                       = domain_data.arn
       }
     ]
   ])
