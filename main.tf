@@ -10,7 +10,8 @@ locals {
       for table_name in domain_data.dynamodb_tables : {
         team                      = domain_name
         policy_json_tpl_file_path = domain_data.dynamo_db_policy_json_tpl_path
-        table_name               = table_name
+        table_name                = table_name
+        arn                       = arn
       }
     ]
   ])
@@ -39,8 +40,9 @@ resource "aws_dynamodb_resource_policy" "this" {
   for_each = { for idx, value in local.applications_data : "${value.table_name}" => value }
 
   resource_arn = aws_dynamodb_table.this[each.key].arn
-  
-  policy       = templatefile("${each.value.policy_json_tpl_file_path}", {
+
+  policy = templatefile("${each.value.policy_json_tpl_file_path}", {
     name = each.value.table_name
+    arn  = each.value.arn
   })
 }

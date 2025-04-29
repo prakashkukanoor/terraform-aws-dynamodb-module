@@ -1,7 +1,8 @@
 variable "applications" {
   type = map(object({
-    dynamodb_tables           = list(string)
+    dynamodb_tables                = list(string)
     dynamo_db_policy_json_tpl_path = string
+    arn                            = string
   }))
 }
 
