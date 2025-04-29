@@ -41,6 +41,6 @@ resource "aws_dynamodb_resource_policy" "this" {
   resource_arn = aws_dynamodb_table.this[each.key].arn
   
   policy       = templatefile("${each.value.policy_json_tpl_file_path}", {
-    bucket = each.value.table_name
+    name = each.value.table_name
   })
 }
