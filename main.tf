@@ -34,6 +34,10 @@ resource "aws_dynamodb_table" "this" {
   point_in_time_recovery {
     enabled = true
   }
+
+  tags = merge(
+    local.common_tags,
+  { team = "${each.value.team}" })
 }
 
 resource "aws_dynamodb_resource_policy" "this" {
